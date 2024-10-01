@@ -19,7 +19,7 @@ function App() {
               </Container>
           </Navbar>
         </header>
-        <main>
+        <main className='bkmain'>
           <Container>
             <Routes>
               <Route path="/" element={<HomeScreen/>} />
@@ -28,9 +28,7 @@ function App() {
           </Container>
         </main>
         <footer>
-          <Container>
             <div className="text-center">All rights reserved &copy; {new Date().getFullYear()}</div>
-          </Container>
         </footer>
       </div>
     </BrowserRouter>

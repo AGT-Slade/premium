@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
     res.send(`<h1 style="text-align: center; background-color: powderblue">Server at http://localhost:${port}</h1>`);
 });
 
-app.get('/api/products', (req, res) => (
+app.get('/api/products', async(req, res) => (
     res.send(data.products))
 );
 

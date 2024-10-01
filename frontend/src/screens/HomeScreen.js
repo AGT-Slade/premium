@@ -1,7 +1,9 @@
-import { Link } from 'react-router-dom';
+
 import { useEffect, useReducer } from 'react';
 import axios from 'axios';
-
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Product from '../Component/Product';
 
 const reducer = (state, action) => {
   switch(action.type) {
@@ -16,7 +18,6 @@ function HomeScreen() {
   const [{loading, products, error}, dispatch] = useReducer(reducer, {
     loading:true, products: [], error: ''
   });
-console.log(typeof error);
   
 
   useEffect(() => {
@@ -33,28 +34,24 @@ console.log(typeof error);
     }, []
   );
 
-    return (
-        <div>
-            <h1>Products</h1>
-          <div className="products">
-            {loading? <div>Loading...</div> 
-            : error? <div>{error}</div> : (products.map((productArray) => 
-              (
-                 <div className="product" key={productArray.slug}>
-                   <Link to={`/product/${productArray.slug}`}>
-                     <img src={productArray.image} alt={productArray.name} />
-                   </Link>
-                   <div className="product-info">
-                     <Link to={`/product/${productArray.slug}`}>
-                       <p>{productArray.name}</p>
-                     </Link>
-                     <p><strong>{productArray.price}</strong></p>
-                     <button type="button">Add to cart</button>
-                   </div>
-                 </div>
-               )
-           ))}
-          </div>
-        </div>
-    );
-}export default HomeScreen;
+  return (
+            <div>
+                <h1>Products</h1>
+              <div className="products">
+                {loading? <div>Loading...</div> 
+                : error? <div>{error}</div> :
+                <Row>
+                  {products.map((product) => 
+                    (
+                      <Col key={product.slug} sm={6} md={4} lg={3} className='mb-3'>
+                        <Product product = {product}/>
+                      </Col> 
+                    ))}
+                </Row> 
+                }
+              </div>
+            </div>
+          );
+}
+
+export default HomeScreen;

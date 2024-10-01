@@ -15,23 +15,35 @@ main {
   flex: 1;
 }
 
-main div.products {
+.bkmain {
+  background-color: rgba(88,53,135,.5);
+}
+.btn-primary, .btn-outline-primary {
+  background-color: #f0c040;
+  color: #000000;
+}
+
+.products {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-main div.product {
+.rating span i {
+  color: #070500;
+}
+
+.product {
   border: 1px #404040 solid;
   margin: 1rem;;
 }
 
-main div.product a img {
+.product a img {
   width: 100%;
   max-width: 250px;;
 }
 
-main div.product div.product-info {
+.product .product-info {
   padding: 1rem;
 }
 
