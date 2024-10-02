@@ -29,9 +29,21 @@ main {
   justify-content: center;
 }
 
+.rating span {
+  margin-right: .25rem;
+  white-space: nowrap;
+}
+
+.rating span:last-child {
+  margin-right: 0;
+  
+}
+
 .rating span i {
   color: #070500;
 }
+
+
 
 .product {
   border: 1px #404040 solid;
@@ -52,3 +64,6 @@ main {
   color: #404040;
 }
 
+.img-large {
+  max-width: 100%;
+}
