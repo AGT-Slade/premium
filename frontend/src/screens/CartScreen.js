@@ -3,15 +3,45 @@ import { useStore } from "../Store";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MessageBox from "../Component/MessageBox";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from "react-bootstrap/esm/Button";
 import Card from 'react-bootstrap/Card';
+import axios from "axios";
 
 function CartsScreen() {
+    const navigate = useNavigate();
     const {state, ctxDispatch} = useStore(); 
     const {cart} = state;
     const {cartItems} = cart;
+    
+
+    const updateCartHandler = async (item, quantity) => {
+        const {data} = await axios.get(`/api/products/${item._id}`);
+        if (data.countInStock < quantity) {
+            window.alert('Sorry. Maximum quantity available reached');
+            return;
+        }
+        ctxDispatch({
+            type: 'CART_ADD_ITEM',
+            payload: { ...item, quantity },
+        });
+    }
+
+    const removeItemHandler = (item) => {
+        ctxDispatch({
+            type: 'CART_REMOVE_ITEM',
+            payload: item,
+        });
+    }
+
+    const checkoutHandler = () => {
+        //ctxDispatch({type: 'CART_CLEAR'});
+        navigate('/signin?redirect=/shipping')
+    }
+
+
+
     return (
         <div>
             <Helmet>
@@ -36,11 +66,19 @@ function CartsScreen() {
                                         <Link to={`/product/${item.slug}`}>{item.name}</Link>
                                     </Col>
                                     <Col md={3}>                                   
-                                        <Button variant="light" disabled={item.quantity === 1}>
+                                        <Button 
+                                        variant="light" 
+                                        onClick={() => updateCartHandler(item, item.quantity - 1)}
+                                        disabled={item.quantity === 1}
+                                        >
                                         <i class="fa-solid fa-circle-minus"></i>
                                         </Button>{` `}
                                         <span>{item.quantity}</span>{` `}
-                                        <Button variant="light">
+                                        <Button 
+                                            variant="light"
+                                            onClick={() => updateCartHandler(item, item.quantity + 1)}
+                                            disabled={item.quantity === item.countInStock}
+                                        >
                                             <i className="fa-solid fa-circle-plus"></i>
                                         </Button>
                                     </Col>
@@ -48,7 +86,11 @@ function CartsScreen() {
                                         ${item.price}
                                     </Col>
                                     <Col md={2}>
-                                        <Button type="button" variant="light">
+                                        <Button 
+                                        type="button" 
+                                        variant="light"
+                                        onClick={() => removeItemHandler(item)}
+                                        >
                                             <i className="fa-solid fa-trash"></i>
                                         </Button>
                                     </Col>
@@ -74,6 +116,7 @@ function CartsScreen() {
                                         <Button
                                             type="button"
                                             variant="primary"
+                                            onClick={checkoutHandler}
                                             disabled={cartItems.length === 0}
                                             >Checkout
                                         </Button>
