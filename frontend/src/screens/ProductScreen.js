@@ -12,6 +12,7 @@ import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../Component/LoadingBox';
 import MessageBox from '../Component/MessageBox';
 import { getError } from "../utils";
+import { useStore } from "../Store";
 
 
 
@@ -29,11 +30,16 @@ function ProductScreen() {
     const params = useParams();
     const {slug} = params;
 
-    const [{loading, product, error}, dispatch] = useReducer(reducer, {
-        loading:true, product: [], error: ''
-      });
-      
-    
+    const initialState = {
+        loading: true,
+        error: '',
+        product: []
+    }
+
+    const [{loading, product, error}, dispatch] = useReducer(reducer, initialState);
+
+  
+
       useEffect(() => {
           const fetchProducts = async () => {
             dispatch({type: 'FETCH_REQUEST'});
@@ -45,8 +51,14 @@ function ProductScreen() {
             }};
            
           fetchProducts();
-        }, [slug]
+        }, [slug] 
       );
+
+
+      const {ctx} = useStore();
+       const addToCartHandler = () => {
+         ctx({type: 'CART_ADD_ITEM', payload: {...product, quantity: 1}});
+       }
     
     return(
           loading? <LoadingBox/> : 
@@ -101,7 +113,7 @@ function ProductScreen() {
                           product.countInStock>0 && (
                             <ListGroup.Item>
                               <div className="d-grid">
-                                <Button variant="primary">Add to Cart</Button>
+                                <Button onClick={addToCartHandler} variant="primary">Add to Cart</Button>
                               </div>
                             </ListGroup.Item>
                           )

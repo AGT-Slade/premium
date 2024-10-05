@@ -43,7 +43,7 @@ function HomeScreen() {
               <Helmet>
                 <title>Premium</title>
               </Helmet>
-                <h1>Products</h1>
+                <h1 className="text-white">Products</h1>
               <div className="products">
                 {loading? <LoadingBox/> : 
                 error? <MessageBox variante="danger">{error}</MessageBox> :

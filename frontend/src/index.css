@@ -16,7 +16,8 @@ main {
 }
 
 .bkmain {
-  background-color: rgba(88,53,135,.5);
+  /* background-color: rgba(88,53,135,.5); */
+  background-color: rgba(43, 42, 51, 1);
 }
 .btn-primary, .btn-outline-primary {
   background-color: #f0c040;
