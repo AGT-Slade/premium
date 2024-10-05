@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
-import logger from "use-reducer-logger";
+//import logger from "use-reducer-logger";
 
 export const Store = createContext(null);
 
@@ -32,7 +32,7 @@ const initialState = {
 
 
 export function StoreProvider(props) {
-    const [state, ctxDispatch] = useReducer(logger(reducer), initialState);
+    const [state, ctxDispatch] = useReducer(reducer, initialState);
 
     if (!props) {
         throw new Error("StoreProvider requires a props object");

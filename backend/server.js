@@ -25,7 +25,6 @@ app.get('/api/product/:slug', (req, res) => {
 app.get('/api/products/:id', (req, res) => {
     const product = data.products.find((x) => (x._id === req.params.id));
     if (product) {
-        console.log('Testing' + product);
         res.send(product);
     } else {
         res.status(404).send({ message: 'Cart Item Not Found.' });

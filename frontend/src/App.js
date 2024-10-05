@@ -8,6 +8,7 @@ import Container from 'react-bootstrap/Container';
 import {LinkContainer} from 'react-router-bootstrap';
 import Badge from 'react-bootstrap/esm/Badge';
 import { useStore } from './Store';
+import CartScreen from './screens/CartScreen';
 
 
 
@@ -43,6 +44,7 @@ const {cart} = state;
           <Container fluid className='px-5'>
             <Routes>
               <Route path="/" element={<HomeScreen/>} />
+              <Route path="/cart" element={<CartScreen/>} />
               <Route path="/product/:slug" element={<ProductScreen/>} />
             </Routes>
           </Container>
