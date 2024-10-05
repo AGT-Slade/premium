@@ -55,9 +55,20 @@ function ProductScreen() {
       );
 
 
-      const {ctx} = useStore();
-       const addToCartHandler = () => {
-         ctx({type: 'CART_ADD_ITEM', payload: {...product, quantity: 1}});
+      const {state, ctxDispatch} = useStore();
+      const {cart} = state;
+       const addToCartHandler = async () => {
+        const existItem = cart.cartItems.find((x) => x._id === product._id);
+        const quantity = existItem ? existItem.quantity + 1 : 1;
+        const {data} = await axios.get(`/api/products/${product._id}`);
+        if (data.countInStock < quantity) {
+          window.alert('Sorry. Maximum quantity available reached');
+          return;
+        } 
+         ctxDispatch({
+          type: 'CART_ADD_ITEM',
+          payload: {...product, quantity: quantity}
+        });
        }
     
     return(
