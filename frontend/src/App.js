@@ -9,6 +9,7 @@ import {LinkContainer} from 'react-router-bootstrap';
 import Badge from 'react-bootstrap/esm/Badge';
 import { useStore } from './Store';
 import CartScreen from './screens/CartScreen';
+import SigninScreen from './screens/SigninScreen';
 
 
 
@@ -46,6 +47,7 @@ const {cart} = state;
               <Route path="/" element={<HomeScreen/>} />
               <Route path="/cart" element={<CartScreen/>} />
               <Route path="/product/:slug" element={<ProductScreen/>} />
+              <Route path="/signin" element={<SigninScreen/>} />
             </Routes>
           </Container>
         </main>
