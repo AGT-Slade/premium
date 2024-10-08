@@ -1,3 +1,5 @@
+import bycrypt from 'bcryptjs';
+
 const data = {
     products: [
         {
@@ -51,6 +53,21 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             description: 'high quality product'
+        }
+    ],
+    users:[
+        {
+            name: 'John',
+            email: 'joe@lamol.com',
+            password: bycrypt.hashSync('147'),
+            isAdmin: true
+        },
+        {
+            name: 'John',
+            email: 'joe@lol.com',
+            password: bycrypt.hashSync('369'),
+            isAdmin: false
+
         }
     ]
 }
