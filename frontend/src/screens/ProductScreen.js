@@ -45,7 +45,7 @@ function ProductScreen() {
           const fetchProducts = async () => {
             dispatch({type: 'FETCH_REQUEST'});
             try {
-              const results = await axios.get(`/api/product/${slug}`);
+              const results = await axios.get(`/api/products/slug/${slug}`);
               dispatch({type: 'FETCH_SUCCESS', payload: results.data});
             } catch (err) {
               dispatch({type: 'FETCH_FAIL', payload: getError(err)});
@@ -59,9 +59,14 @@ function ProductScreen() {
       const {state, ctxDispatch} = useStore();
       const {cart} = state;
        const addToCartHandler = async () => {
+        
         const existItem = cart.cartItems.find((x) => x._id === product._id);
         const quantity = existItem ? existItem.quantity + 1 : 1;
-        const {data} = await axios.get(`/api/products/${product._id}`);
+        console.log("ID  " +product._id);
+        const {testData} = await axios.get(`/api/test`);
+        console.log("testData" +testData);
+        const {data} = await axios.get(`/api/products/id/${product._id}`);
+        console.log("date" + data);
         if (data.countInStock < quantity) {
           window.alert('Sorry. Maximum quantity available reached');
           return;
