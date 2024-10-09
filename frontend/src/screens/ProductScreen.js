@@ -62,11 +62,7 @@ function ProductScreen() {
         
         const existItem = cart.cartItems.find((x) => x._id === product._id);
         const quantity = existItem ? existItem.quantity + 1 : 1;
-        console.log("ID  " +product._id);
-        const {testData} = await axios.get(`/api/test`);
-        console.log("testData" +testData);
         const {data} = await axios.get(`/api/products/id/${product._id}`);
-        console.log("date" + data);
         if (data.countInStock < quantity) {
           window.alert('Sorry. Maximum quantity available reached');
           return;

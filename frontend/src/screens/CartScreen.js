@@ -59,7 +59,7 @@ function CartsScreen() {
                     (
                        <ListGroup> 
                         {cartItems.map((item) => (
-                            <ListGroup.Item key={item.id}>
+                            <ListGroup.Item key={item._id}>
                                 <Row className="align-items-center">
                                     <Col md={4}>
                                         <img src={item.image} alt={item.name} className="img-fluid rounded img-thumbnail"/>{` `}
@@ -71,7 +71,7 @@ function CartsScreen() {
                                         onClick={() => updateCartHandler(item, item.quantity - 1)}
                                         disabled={item.quantity === 1}
                                         >
-                                        <i class="fa-solid fa-circle-minus"></i>
+                                        <i className="fa-solid fa-circle-minus"></i>
                                         </Button>{` `}
                                         <span>{item.quantity}</span>{` `}
                                         <Button 

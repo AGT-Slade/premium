@@ -108,4 +108,9 @@
 22. Create Signin Backend API
     1. create signin api
     2. npm install jsonwebtoken
-    3. define generateToken
+    3. define 
+
+23. Complete Signin Screen
+    1. Handle submit action
+    2. save token in store and local storage
+    3. show user name in header
