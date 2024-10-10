@@ -51,9 +51,9 @@ main {
   margin: 1rem;;
 }
 
-.product a img {
+.products a img {
   width: 100%;
-  max-width: 250px;;
+  min-width: 150px;
 }
 
 .product .product-info {
@@ -76,4 +76,14 @@ main {
 
 .small-container {
   max-width: 600px;
+}
+
+.checkout-steps > div {
+  border-bottom: 02.rem solid #a0a0a0;
+  color: #a0a0a0;
+}
+
+.checkout-steps > div.active {
+  border-bottom: 02.rem solid #f08000;
+  color: #f08000;
 }

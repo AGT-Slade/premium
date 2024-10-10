@@ -22,20 +22,38 @@ function SigninScreen() {
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        const successToastId = "success-toast"; 
+        const errorToastId = "error-toast";
         try {
             const {data} = await axios.post('/api/users/signin', {
                 email,
                 password
             });
+             // Dismiss any error toasts that might still be active
+             if (toast.isActive(errorToastId)) {
+                toast.dismiss(errorToastId);
+            }
             ctxDispatch({type: 'USER_SIGNIN', payload: data});
             localStorage.setItem('userInfo', JSON.stringify(data));
             navigate(redirect || '/');
-            toast.success('Sign in successful!');
+
+           
+            // Display success toast and replace any existing success toasts
+            if (!toast.isActive(successToastId)) {
+                toast.success('Sign in successful!', { toastId: successToastId });
+            }
+
+        // Clear any existing error toasts
         }
          catch (error) {
-            const toastId = "error-toast";
-            if (!toast.isActive(toastId)) {
-                toast.error(getError(error), { toastId });
+
+            if (toast.isActive(successToastId)) {
+                toast.dismiss(successToastId);
+            }
+    
+            // Display error toast and replace any existing error toasts
+            if (!toast.isActive(errorToastId)) {
+                toast.error(getError(error), { toastId: errorToastId });
             }
         }
     }

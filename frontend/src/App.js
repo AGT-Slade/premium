@@ -13,7 +13,8 @@ import Badge from 'react-bootstrap/esm/Badge';
 import { useStore } from './Store';
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
-import ShippingScreen from './screens/ShippingScreen';
+import ShippingAddressScreen from './screens/ShippingAddressScreen';
+import PaymentScreen from './screens/PaymentScreen';
 
 
 
@@ -26,12 +27,13 @@ const {cart, userInfo} = state;
 const signoutHandler = () => {
   ctxDispatch({type: 'USER_SIGNOUT'});
   localStorage.removeItem('userInfo');
+  localStorage.removeItem('shippingAddress');
 }
   return (
     
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
-        <ToastContainer position="bottom-center" limit={1} />
+        <ToastContainer position="bottom-center" limit={2} />
         <header>
           <Navbar bg="dark" variant="dark">
               <Container fluid className='px-5'>
@@ -72,13 +74,14 @@ const signoutHandler = () => {
           </Navbar>
         </header>
         <main className='bkmain'>
-          <Container fluid className='px-5'>
+          <Container >
             <Routes>
               <Route path="/" element={<HomeScreen/>} />
               <Route path="/cart" element={<CartScreen/>} />
               <Route path="/product/:slug" element={<ProductScreen/>} />
               <Route path="/signin" element={<SigninScreen/>} />
-              <Route path="/shipping" element={<ShippingScreen/>} />
+              <Route path="/shipping" element={<ShippingAddressScreen/>} />
+              <Route path="/payment" element={<PaymentScreen/>} />
             </Routes>
           </Container>
         </main>
