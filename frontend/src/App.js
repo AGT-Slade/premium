@@ -15,6 +15,7 @@ import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import PaymentScreen from './screens/PaymentScreen';
+import SignupScreen from './screens/SignupScreen';
 
 
 
@@ -80,6 +81,7 @@ const signoutHandler = () => {
               <Route path="/cart" element={<CartScreen/>} />
               <Route path="/product/:slug" element={<ProductScreen/>} />
               <Route path="/signin" element={<SigninScreen/>} />
+              <Route path="/signup" element={<SignupScreen/>} />
               <Route path="/shipping" element={<ShippingAddressScreen/>} />
               <Route path="/payment" element={<PaymentScreen/>} />
             </Routes>

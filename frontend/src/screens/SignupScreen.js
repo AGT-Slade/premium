@@ -9,23 +9,32 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
 
-function SigninScreen() {
+function SignupScreen() {
     const navigate = useNavigate();
     const { search } = useLocation();
     const redirectInUrl = new URLSearchParams(search).get('redirect');
     const redirect = redirectInUrl ? redirectInUrl : '/';
 
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setconfirmPassword] = useState('');
+
     const {state, ctxDispatch} = useStore();
     const {userInfo} = state;
 
     const submitHandler = async (e) => {
         e.preventDefault();
+      
         const successToastId = "success-toast"; 
         const errorToastId = "error-toast";
+        if (password !== confirmPassword) {
+            toast.error('Passwords do not match');
+            return;
+        }
         try {
-            const {data} = await axios.post('/api/users/signin', {
+            const {data} = await axios.post('/api/users/signup', {
+                name,
                 email,
                 password
             });
@@ -68,10 +77,14 @@ function SigninScreen() {
     return <div>
                 <Container className="small-container">
                     <Helmet>
-                        <title>Sign In</title>
+                        <title>Sign Up</title>
                     </Helmet>
-                    <h1 className="my-3 text-white">Sign In</h1>
+                    <h1 className="my-3 text-white">Sign Up</h1>
                     <Form onSubmit={submitHandler}>
+                    <Form.Group className="mb-3" controlId="name">
+                            <Form.Label className="text-white">Name</Form.Label>
+                            <Form.Control autoComplete="current-password" type="text" placeholder="Enter Name" required onChange={(e) => setName(e.target.value)}/>
+                        </Form.Group>
                         <Form.Group className="mb-3" controlId="email">
                             <Form.Label className="text-white">Email address</Form.Label>
                             <Form.Control autoComplete="current-password" type="email" placeholder="Enter email" required onChange={(e) => setEmail(e.target.value)}/>
@@ -80,13 +93,17 @@ function SigninScreen() {
                             <Form.Label className="text-white">Password</Form.Label>
                             <Form.Control autoComplete="current-password" type="password" placeholder="Enter password" required onChange={(e) => setPassword(e.target.value)}/>
                         </Form.Group>
+                        <Form.Group className="mb-3" controlId="confirmPassword">
+                            <Form.Label className="text-white">Confirm Password</Form.Label>
+                            <Form.Control autoComplete="current-password" type="password" placeholder="Confirm password" required onChange={(e) => setconfirmPassword(e.target.value)}/>
+                        </Form.Group>
                         <Form.Group>
                             <div className="mb-3">
-                                <Button type="submit">Sign In</Button>
+                                <Button type="submit">Sign Up</Button>
                             </div>
                             <div className="mb-3 text-white">
-                                New customer?{' '}
-                                <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+                                Already have an account?{' '}
+                                <Link to={`/singin?redirect=${redirect}`}>Sing-In</Link>
                             </div>
                         </Form.Group>
                     </Form>
@@ -94,4 +111,4 @@ function SigninScreen() {
             </div>;
 }
 
-export default SigninScreen;
+export default SignupScreen;
