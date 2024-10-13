@@ -18,11 +18,10 @@ function ShippingAddressScreen() {
         cart: {shippingAddress}
     } = state;
     const [fullName, setFullName] = useState(shippingAddress.fullName || '');
-    const [fullAddress, setAddress] = useState(shippingAddress.fullAddress || '');
+    const [address, setAddress] = useState(shippingAddress.address || '');
     const [city, setCity] = useState(shippingAddress.city || '');
     const [postalCode, setPostalCode] = useState(shippingAddress.postalCode || '');
     const [country, setCountry] = useState(shippingAddress.country || '');
-    console.log(fullName, fullAddress, city, postalCode, country);
     useEffect(() => {
         if (!userInfo) {
             navigate('/signin?redirect=/shipping');
@@ -35,7 +34,7 @@ function ShippingAddressScreen() {
                 type: 'SAVE_SHIPPING_ADDRESS', 
                 payload: {
                             fullName, 
-                            fullAddress, 
+                            address, 
                             city, 
                             postalCode, 
                             country
@@ -44,7 +43,7 @@ function ShippingAddressScreen() {
         );
         localStorage.setItem(
             'shippingAddress',
-            JSON.stringify({fullName, fullAddress, city, postalCode, country})
+            JSON.stringify({fullName, address, city, postalCode, country})
         );
         navigate('/payment');
     }
@@ -64,7 +63,7 @@ function ShippingAddressScreen() {
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="address">
                         <Form.Label className="text-white">Address</Form.Label>
-                        <Form.Control type="text" placeholder="Enter address" value={fullAddress} onChange={(e) => setAddress(e.target.value)} required />
+                        <Form.Control type="text" placeholder="Enter address" value={address} onChange={(e) => setAddress(e.target.value)} required />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="city">
                         <Form.Label className="text-white">City</Form.Label>
