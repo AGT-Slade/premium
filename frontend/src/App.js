@@ -15,8 +15,9 @@ import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SignupScreen from './screens/SignupScreen';
-import TestScreen from './screens/TestScreen';
+//import TestScreen from './screens/TestScreen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
 
 
 
@@ -87,6 +88,7 @@ const signoutHandler = () => {
               <Route path="/signup" element={<SignupScreen/>} />
               <Route path="/shipping" element={<ShippingAddressScreen/>} />
               <Route path="/payment" element={<PaymentMethodScreen/>} />
+              <Route path="/placeorder" element={<PlaceOrderScreen/>} />
             </Routes>
           </Container>
         </main>

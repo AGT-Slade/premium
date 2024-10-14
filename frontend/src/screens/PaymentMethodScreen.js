@@ -38,7 +38,7 @@ function PaymentMethodScreen() {
                         <Form.Check 
                         type="radio" 
                         id="PayPal" 
-                        label="Alfonso's Credit Card" 
+                        label="PayPal" 
                         value="PayPal"
                         checked={paymentMethodName === 'PayPal'}
                         onChange={(e)=>setPaymentMethod(e.target.value)}/>
@@ -50,6 +50,24 @@ function PaymentMethodScreen() {
                         label="Stripe" 
                         value="Stripe"
                         checked={paymentMethodName === 'Stripe'}
+                        onChange={(e)=>setPaymentMethod(e.target.value)}/>
+                    </div>
+                    <div className="mb-3">
+                        <Form.Check 
+                        type="radio" 
+                        id="DigiWallet" 
+                        label="DigiWallet" 
+                        value="DigiWallet"
+                        checked={paymentMethodName === 'DigiWallet'}
+                        onChange={(e)=>setPaymentMethod(e.target.value)}/>
+                    </div>
+                    <div className="mb-3">
+                        <Form.Check 
+                        type="radio" 
+                        id="E-KYASH" 
+                        label="E-KYASH" 
+                        value="E-KYASH"
+                        checked={paymentMethodName === 'E-KYASH'}
                         onChange={(e)=>setPaymentMethod(e.target.value)}/>
                     </div>
                     <Button type="submit">Continue</Button>
