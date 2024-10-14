@@ -10,13 +10,33 @@ import Button from "react-bootstrap/esm/Button";
 import axios from "axios";
 import { getError } from "../utils";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
+import { useEffect, useReducer } from "react";
+import LoadingBox from "../Component/LoadingBox";
 
+
+
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'CREATE_REQUEST':
+            return { ...state, loading: true };
+        case 'CREATE_SUCCESS':
+            return { ...state, loading: false };
+        case 'CREATE_FAIL':
+            return { ...state, loading: false };
+        default:
+            return state;
+    }
+};
 function PlaceOrderScreen() {
     const navigate = useNavigate();
 
-    const { state } = useStore();
-    const { cart} = state;
+    const [{loading}, dispatch] = useReducer(reducer, {
+        loading: false,
+        error: '',
+    });
+
+    const { state, ctxDispatch } = useStore();
+    const { userInfo, cart} = state;
 
 
     const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; // 123.456 => 123.46
@@ -26,6 +46,7 @@ function PlaceOrderScreen() {
     cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
     const placeOrderHandler = async () => {
         try {
+            dispatch({ type: 'CREATE_REQUEST' });   
             const { data } = await axios.post('/api/orders', {
                 orderItems: cart.cartItems,
                 shippingAddress: cart.shippingAddress,
@@ -34,9 +55,20 @@ function PlaceOrderScreen() {
                 shippingPrice: cart.shippingPrice,
                 taxPrice: cart.taxPrice,
                 totalPrice: cart.totalPrice
-            });
-            navigate(`/order/${data.order._id}`);
+            },
+            {
+                headers: {
+                    authorization: `Bearer ${userInfo.token}`,
+                },
+            },
+        );
+        ctxDispatch({ type: 'CART_CLEAR' });
+        dispatch({ type: 'CREATE_SUCCESS' });
+        localStorage.removeItem('cartItems');
+        navigate(`/order/${data.order._id}`);
+
         } catch (err) {
+            dispatch({ type: 'CREATE_FAIL' });
             toast.error(getError(err));
         }
     }
@@ -138,6 +170,9 @@ function PlaceOrderScreen() {
                                             >Place Order
                                             </Button>
                                         </div>
+                                        {loading && <LoadingBox>
+
+                                        </LoadingBox>}
                                     </ListGroup.Item>
                                 </ListGroup> 
                             </Card.Body>
