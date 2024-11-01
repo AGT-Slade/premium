@@ -28,7 +28,15 @@ const orderSchema = new mongoose.Schema(
             id: String,
             status: String,
             update_time: String,
-            email_address: String
+            payer: {
+                payer_id: String,
+                firstName: String,
+                lastName: String,
+                email_address: String,
+                address: {
+                    country_code: String
+                }
+            }
         },
         itemsPrice: {type: Number, required: true},
         shippingPrice: {type: Number, required: true},
