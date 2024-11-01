@@ -79,7 +79,7 @@ function SignupScreen() {
                     <Helmet>
                         <title>Sign Up</title>
                     </Helmet>
-                    <h1 className="my-3 text-white">Sign Up</h1>
+                    <h1 className="my-4 text-white">Sign Up</h1>
                     <Form onSubmit={submitHandler}>
                     <Form.Group className="mb-3" controlId="name">
                             <Form.Label className="text-white">Name</Form.Label>

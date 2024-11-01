@@ -133,7 +133,7 @@ function OrderScreen() {
             <Helmet>
                 <title>Order {orderId}</title>
             </Helmet>
-            <h1 className="my-3 text-white">Order {orderId}</h1>
+            <h1 className="my-4 text-white">Order {orderId}</h1>
             <Row>
                 <Col md={8}>
                     <Card className="mb-3">

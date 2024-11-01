@@ -3,3 +3,10 @@ export const getError = (error) => {
             error.response.data.message : 
             error.message;
 };
+
+export const clearLocalStorage = () => {
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('shippingAddress');
+    localStorage.removeItem('paymentMethod');
+    localStorage.removeItem('__paypal_storage__');
+}

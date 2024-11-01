@@ -49,7 +49,7 @@ function CartsScreen() {
                     Shopping Cart
                 </title>
             </Helmet>
-            <h1 className="text-white">Shopping Cart</h1>
+            <h1 className="my-4 text-white">Shopping Cart</h1>
             <Row>
                 <Col md={8}>
                 {cartItems.length === 0 ? (
