@@ -37,10 +37,6 @@ app.use('/api/orders', orderRouter);
 
 
 
-app.get('/', (req, res) => {
-    res.send(`<h1 style="text-align: center; background-color: powderblue">Server at http://localhost:${port}</h1>`);
-});
-
 
 
 // app.use('/api/GETtest', (req, res) => {
@@ -50,8 +46,8 @@ app.get('/', (req, res) => {
 
 // app.use('/api/users', userRouter);
 
-const _dirname = path.resolve();
-app.use(express.static(path.join(_dirname, '/frontend/build')));
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, '/frontend/build')));
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
 });

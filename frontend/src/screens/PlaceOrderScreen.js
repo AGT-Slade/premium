@@ -88,7 +88,7 @@ function PlaceOrderScreen() {
                 </Helmet>
                 <h1 className="my-4 text-white">Preview Order</h1>
                 <Row>
-                    <Col md={8}>
+                    <Col md={8} className="my-2">
                         <Card className="mb-3">
                             <Card.Body>
                                 <Card.Title>Shipping Details:</Card.Title>
@@ -132,7 +132,7 @@ function PlaceOrderScreen() {
                             </Card.Body>
                         </Card>  
                     </Col>
-                    <Col md={4}>
+                    <Col md={4} className="my-2">
                         <Card>
                             <Card.Body>
                                 <Card.Title>Order Summary</Card.Title>

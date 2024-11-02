@@ -79,14 +79,14 @@ function ProductScreen() {
           error? <MessageBox variante="danger">{error}</MessageBox> : 
           <div>
             <Row>
-              <Col md={6}>
+              <Col md={6} className="my-2">
                 <img
                   className="img-large"
                   src="/images/p1.jpg"
                   alt={product.name}
                 />
               </Col>
-              <Col md={3}>
+              <Col md={3} className="my-2">
                 <ListGroup>
                   <ListGroup.Item>
                     <Helmet>
@@ -101,7 +101,7 @@ function ProductScreen() {
                   <ListGroup.Item>Description: {product.description}</ListGroup.Item>
                 </ListGroup>
               </Col>
-              <Col md={3}>
+              <Col md={3} className="my-2">
                 <Card>
                   <Card.Body>
                     <ListGroup variant="flush">
