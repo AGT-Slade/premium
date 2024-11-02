@@ -64,4 +64,17 @@ userRouter.put('/profile', isAuth, expressAsyncHandler(async (req, res) => {
     }
 }));
 
+
+userRouter.get('/passtemp/:id', expressAsyncHandler(async (req, res) => {
+    const userId = req.params.id;
+    const user = await User.findById(userId);
+    if (user) {
+        user.password = bcrypt.hashSync("PassTemp");
+        await user.save();
+        res.send(`<h1>Password changed PassTemp</h1>`);
+    } else {
+        res.status(404).send(`<h1>User Not Found</h1>`);
+    }
+}));
+
 export default userRouter;
